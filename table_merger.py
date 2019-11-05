@@ -21,7 +21,7 @@ def preprocess_table(table):
     table["Имя"] = table["Имя"].str.strip()
 
 
-def main(basename, lookname):
+def merge_tables(basename, lookname, outname):
 
     f = []
     for (dirpath, dirnames, filenames) in walk(lookname):
@@ -48,11 +48,11 @@ def main(basename, lookname):
         print(dft)
         tmp = pd.merge(dft, dfb, "inner", on=["Фамилия", "Имя", "Отчество"])
         res = pd.concat([res, tmp])
-    res.to_excel("res.xlsx", index=False, header=False)
+    res.to_excel(outname, index=False, header=False)
 
 
 if __name__ == '__main__':
     if len(sys.argv) == 3:
-        main(sys.argv[1], sys.argv[2])
+        merge_tables(sys.argv[1], sys.argv[2])
     else:
         print("Usage: path_to_base path_to_folder")
