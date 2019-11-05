@@ -16,9 +16,9 @@ def preprocess_table(table):
         tmp["Отчество"] = tmp[['Отчество', 'tmp']].apply(lambda x: ' '.join(x), axis=1)
         table[["Фамилия", "Имя", "Отчество"]] = tmp[["Фамилия", "Имя", "Отчество"]]
     table["Отчество"] = table["Отчество"].fillna('')
-    table["Отчество"] = table['Отчество'].str.strip()
-    table["Фамилия"] = table["Фамилия"].str.strip()
-    table["Имя"] = table["Имя"].str.strip()
+    table["Отчество"] = table['Отчество'].str.strip().str.capitalize()
+    table["Фамилия"] = table["Фамилия"].str.strip().str.capitalize()
+    table["Имя"] = table["Имя"].str.strip().str.capitalize()
 
 
 def merge_tables(basename, lookname, outname):
